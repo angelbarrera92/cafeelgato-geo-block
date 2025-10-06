@@ -1,0 +1,17 @@
+# Archivos de desarrollo
+node_modules/
+.DS_Store
+*.log
+
+# Archivos de Wrangler
+.wrangler/
+.dev.vars
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de sistema
+Thumbs.db

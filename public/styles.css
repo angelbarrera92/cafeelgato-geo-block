@@ -1,0 +1,315 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables de color exactas de Café El Gato */
+:root {
+    --primary-brown: #3D2817;
+    --beige-bg: #E8DCC8;
+    --light-beige: #F5F0E8;
+    --purple: #6B4C9A;
+    --dark-purple: #564079;
+    --text-color: #3D2817;
+    --white: #ffffff;
+    --border-color: #D4C4B0;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--beige-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 100%;
+    width: 100%;
+    background: var(--beige-bg);
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: var(--beige-bg);
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Main Content */
+main {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content-wrapper {
+    text-align: center;
+}
+
+.hero-section {
+    margin-bottom: 50px;
+}
+
+.icon {
+    font-size: 5em;
+    margin-bottom: 25px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 3em;
+    color: var(--primary-brown);
+    margin-bottom: 35px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.message {
+    margin-bottom: 50px;
+    padding: 0 20px;
+}
+
+.main-text {
+    font-size: 1.3em;
+    color: var(--primary-brown);
+    margin-bottom: 25px;
+    line-height: 1.9;
+    font-weight: 400;
+}
+
+.main-text strong {
+    font-weight: 700;
+}
+
+.secondary-text {
+    font-size: 1.05em;
+    color: var(--primary-brown);
+    line-height: 1.9;
+    max-width: 650px;
+    margin: 0 auto;
+    opacity: 0.85;
+}
+
+/* Contact Section */
+.contact-section {
+    background: var(--light-beige);
+    border-radius: 0;
+    padding: 50px 30px;
+    margin: 50px 0;
+    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.contact-section h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2em;
+    color: var(--primary-brown);
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-wrapper {
+    font-size: 2.5em;
+    margin-bottom: 8px;
+}
+
+.contact-label {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--primary-brown);
+    margin-bottom: 8px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.contact-links a {
+    color: var(--primary-brown);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    font-size: 0.95em;
+}
+
+.contact-links a:hover {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(107, 76, 154, 0.3);
+}
+
+/* Button */
+.back-link {
+    margin-top: 50px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--purple);
+    color: var(--white);
+    padding: 16px 45px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(107, 76, 154, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    background: var(--dark-purple);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(107, 76, 154, 0.35);
+}
+
+/* Footer */
+footer {
+    background: var(--primary-brown);
+    padding: 40px 30px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.footer-copyright {
+    color: var(--beige-bg);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.footer-note {
+    font-size: 0.85em;
+    font-style: italic;
+    color: var(--beige-bg);
+    opacity: 0.75;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .logo img {
+        max-width: 160px;
+    }
+
+    main {
+        padding: 40px 20px;
+    }
+
+    h2 {
+        font-size: 2.2em;
+    }
+
+    .main-text {
+        font-size: 1.15em;
+    }
+
+    .secondary-text {
+        font-size: 1em;
+    }
+
+    .contact-section {
+        padding: 35px 20px;
+    }
+
+    .contact-methods {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        max-width: 140px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .icon {
+        font-size: 3.5em;
+    }
+
+    main {
+        padding: 30px 15px;
+    }
+
+    .message {
+        padding: 0 10px;
+    }
+
+    .main-text {
+        font-size: 1.05em;
+    }
+
+    .secondary-text {
+        font-size: 0.95em;
+    }
+
+    .contact-section h3 {
+        font-size: 1.6em;
+    }
+
+    .btn-primary {
+        padding: 14px 35px;
+        font-size: 0.95em;
+    }
+}

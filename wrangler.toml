@@ -1,0 +1,20 @@
+# Configuración de Wrangler para desarrollo local
+# Este archivo es opcional pero útil si quieres usar Wrangler CLI
+
+name = "cafeelgato-geo-block"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Para desarrollo local
+# Instala Wrangler: npm install -g wrangler
+# Ejecuta: wrangler dev
+
+# Para desplegar desde CLI (alternativa al dashboard)
+# Ejecuta: wrangler deploy
+
+[env.production]
+name = "cafeelgato-geo-block"
+routes = [
+  { pattern = "cafeelgato.com/*", zone_name = "cafeelgato.com" },
+  { pattern = "www.cafeelgato.com/*", zone_name = "cafeelgato.com" }
+]
