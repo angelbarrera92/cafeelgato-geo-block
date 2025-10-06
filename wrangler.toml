@@ -12,15 +12,9 @@ compatibility_date = "2024-01-01"
 # Para desplegar desde CLI (alternativa al dashboard)
 # Ejecuta: wrangler deploy
 
-# NOTA: Las rutas se deben configurar manualmente en el Dashboard de Cloudflare
-# después del primer despliegue:
-# - cafeelgato.com/*
-# - www.cafeelgato.com/*
-#
-# Para configurar rutas desde wrangler.toml, descomenta esto:
-# [env.production]
-# name = "cafeelgato-geo-block"
-# routes = [
-#   { pattern = "cafeelgato.com/*", zone_name = "cafeelgato.com" },
-#   { pattern = "www.cafeelgato.com/*", zone_name = "cafeelgato.com" }
-# ]
+[env.production]
+name = "cafeelgato-geo-block"
+routes = [
+  { pattern = "cafeelgato.com/*", zone_name = "cafeelgato.com" },
+  { pattern = "www.cafeelgato.com/*", zone_name = "cafeelgato.com" }
+]
