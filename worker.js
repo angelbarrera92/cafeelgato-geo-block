@@ -12,7 +12,7 @@ export default {
     const country = request.cf?.country;
     
     // URL de la página de geo-bloqueo (actualiza esta URL después del despliegue)
-    const GEO_BLOCK_URL = 'https://cafeelgato-geo-block.pages.dev';
+    const GEO_BLOCK_URL = 'https://ouch.cafeelgato.com';
     
     // Si el visitante NO es de España, redirigir a la página de geo-bloqueo
     if (country !== 'ES') {
@@ -20,7 +20,7 @@ export default {
       const url = new URL(request.url);
       
       // Verificar que no estamos en la página de geo-bloqueo
-      if (!url.hostname.includes('cafeelgato-geo-block.pages.dev')) {
+      if (!url.hostname.includes('ouch.cafeelgato.com')) {
         return Response.redirect(GEO_BLOCK_URL, 302);
       }
     }
