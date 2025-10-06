@@ -135,6 +135,7 @@ cafeelgato-geo-block/
 Cada vez que haces push a `main`, automáticamente:
 
 1. ✅ **Despliega la página estática** a Cloudflare Pages
+   - Usa `wrangler-action` (la nueva acción oficial recomendada)
    - Sube únicamente el contenido del directorio `public/`:
      - `index.html`
      - `styles.css`
@@ -148,6 +149,10 @@ Cada vez que haces push a `main`, automáticamente:
      - `www.cafeelgato.com/*`
 
 3. ✅ **Verifica** que todo se desplegó correctamente
+
+### 📝 Nota sobre la migración
+
+Este proyecto usa `wrangler-action@v3` que es la acción oficial recomendada por Cloudflare. La anterior `pages-action@v1` fue deprecada en octubre de 2024.
 
 ---
 
