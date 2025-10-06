@@ -1,32 +1,55 @@
 /**
- * Cloudflare Worker para geo-bloqueo de Café El Gato
+ * Cloudflare Worker for Café El Gato geo-blocking
  * 
- * Este worker detecta si la conexión viene de España.
- * Si NO es España, redirige a la página de geo-bloqueo.
- * Si es España, permite el acceso a la tienda principal.
+ * This worker detects if the connection comes from allowed countries.
+ * If it's NOT from an allowed country, it redirects to the geo-blocking page.
+ * If it's from an allowed country, it allows access to the main store.
+ * 
+ * Features:
+ * - Country-based geo-blocking
+ * - Path-based bypass configuration
+ * - Redirect loop prevention
  */
 
 export default {
   async fetch(request, env) {
-    // Obtener el país del visitante desde Cloudflare
-    const country = request.cf?.country;
-    
-    // URL de la página de geo-bloqueo (actualiza esta URL después del despliegue)
+    // Configuration
+    const ALLOWED_COUNTRIES = ['ES']; // Spain - add more countries like ['ES', 'PT', 'FR']
     const GEO_BLOCK_URL = 'https://ouch.cafeelgato.com';
     
-    // Si el visitante NO es de España, redirigir a la página de geo-bloqueo
-    if (country !== 'ES') {
-      // Evitar bucle de redirección si ya está en la página de geo-bloqueo
-      const url = new URL(request.url);
-      
-      // Verificar que no estamos en la página de geo-bloqueo
+    // Paths that bypass geo-blocking (accessible from any country)
+    const BYPASS_PATHS = [
+      // '/api',        // API endpoints
+      // '/webhook',    // Webhooks
+      // '/health',     // Health checks
+      // '/status',     // Status pages
+      // Add more paths as needed
+    ];
+    
+    // Get visitor information
+    const country = request.cf?.country;
+    const url = new URL(request.url);
+    const path = url.pathname;
+    
+    // Check if current path should bypass geo-blocking
+    const shouldBypass = BYPASS_PATHS.some(bypassPath => 
+      path.startsWith(bypassPath)
+    );
+    
+    // If path should bypass geo-blocking, allow access regardless of country
+    if (shouldBypass) {
+      return fetch(request);
+    }
+    
+    // Apply geo-blocking to all other paths (/* - everything else)
+    if (!ALLOWED_COUNTRIES.includes(country)) {
+      // Avoid redirect loop if already on geo-blocking page
       if (!url.hostname.includes('ouch.cafeelgato.com')) {
         return Response.redirect(GEO_BLOCK_URL, 302);
       }
     }
     
-    // Si es España o ya está en la página de geo-bloqueo, continuar normalmente
-    // El worker pasa la petición al origin sin modificar
+    // If from allowed country or already on geo-blocking page, continue normally
     return fetch(request);
   }
 }
