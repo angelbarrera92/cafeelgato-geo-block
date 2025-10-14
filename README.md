@@ -33,18 +33,21 @@ Visitor → Cloudflare → Worker detects country
 
 ## 🔧 Worker configuration
 
-The Worker in [`worker.js`](worker.js) provides flexible geo-blocking with path-based configuration:
+The Worker in [`worker.js`](worker.js) provides flexible geo-blocking with multiple bypass options:
 
 ```javascript
 // Configuration
 const ALLOWED_COUNTRIES = ['ES']; // Countries with access
 const BYPASS_PATHS = ['/api', '/webhook', '/health']; // Paths that bypass geo-blocking
 
-// All paths /* are geo-blocked except BYPASS_PATHS
-// Visitors from non-allowed countries are redirected with country info
+// Bypass methods (in order of priority):
+// 1. Header: X-Allow-Bypass: true
+// 2. Path-based: Specific paths
+// 3. Country-based: Allowed countries
 ```
 
 **Key features:**
+- ✅ **Header-based bypass**: Use `X-Allow-Bypass: true` header for full access
 - ✅ **Path-based filtering**: Specific paths can bypass geo-blocking
 - ✅ **Country detection**: Uses Cloudflare's `request.cf.country`
 - ✅ **Clean redirects**: Simple redirect to geo-blocking page
@@ -76,9 +79,19 @@ const BYPASS_PATHS = [
 ];
 ```
 
+### Header-based bypass for special access
+```bash
+# Complete bypass using header
+curl -H "X-Allow-Bypass: true" https://cafeelgato.com/
+
+# Regular request (follows geo-blocking rules)
+curl https://cafeelgato.com/
+```
+
 ### How it works
-- **All paths `/*`**: Geo-blocked by default
-- **Bypass paths**: Accessible from any country
+- **Header bypass**: `X-Allow-Bypass: true` allows full access from any country
+- **Path bypass**: Specific paths accessible from any country
+- **All other paths `/*`**: Geo-blocked by default
 - **Clean redirect**: Simple redirect to geo-blocking page without parameters
 
 ## 📊 Monitoring

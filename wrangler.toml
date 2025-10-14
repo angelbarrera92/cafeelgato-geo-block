@@ -8,3 +8,9 @@ routes = [
   { pattern = "cafeelgato.com/*", zone_name = "cafeelgato.com" },
   { pattern = "www.cafeelgato.com/*", zone_name = "cafeelgato.com" }
 ]
+
+[observability]
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
