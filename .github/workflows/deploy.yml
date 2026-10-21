@@ -43,6 +43,20 @@ jobs:
           cat /tmp/worker.json | jq -c '{success,errors}' || true
           [ "$code" = "200" ] || [ "$code" = "404" ] || exit 1
 
+      - name: Delete Pages custom domains
+        run: |
+          set -euo pipefail
+          curl -s -H "Authorization: Bearer $CF_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT/pages/projects/$PAGES/domains" \
+            | jq -r '.result[]?.name' \
+            | while read -r d; do
+                [ -n "$d" ] || continue
+                echo "deleting domain $d"
+                curl -s -X DELETE -H "Authorization: Bearer $CF_TOKEN" \
+                  "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT/pages/projects/$PAGES/domains/$d" \
+                  | jq -e '.success' >/dev/null
+              done
+
       - name: Delete Pages project
         run: |
           set -euo pipefail
