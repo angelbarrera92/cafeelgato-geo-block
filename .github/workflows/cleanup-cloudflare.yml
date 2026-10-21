@@ -64,3 +64,5 @@ jobs:
           curl -s -H "Authorization: Bearer $CF_TOKEN" \
             "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT/pages/projects" \
             | jq -r '.result[]?.name' || true
+
+# one-off cleanup workflow
